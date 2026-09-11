@@ -1,0 +1,33 @@
+[project]
+name = "obj-tracker"
+version = "0.1.0"
+description = "Real Time Object Tracker"
+readme = "README.md"
+authors = [
+    { name = "Abd-Salem", email = "abdallah.ahsraf854@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "opencv-python>=4.9.0",
+    "numpy>=1.26.0",
+    "ultralytics>=8.2.0",
+    "supervision>=0.21.0",
+    "torch>=2.2.0",
+    "torchvision>=0.17.0",
+]
+
+[project.scripts]
+obj-tracker = "obj_tracker:main"
+
+[build-system]
+requires = ["uv_build>=0.12.5,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+torchvision = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
