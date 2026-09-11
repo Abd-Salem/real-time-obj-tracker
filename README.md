@@ -157,5 +157,5 @@ Settings live at the top of `src/obj_tracking_system.py` (and/or `configs.yml`, 
 
 - **Camera not found / black window** make sure no other app is using the webcam, or change `cv2.VideoCapture(0)` to a video file path in `src/main.py`.
 - **First run is slow** the YOLO weights (`yolov8n.pt`) are being downloaded; subsequent runs start instantly.
-- **Slow on old hardware** lower `DETECTION_FPS` (e.g. `2`) in the config.
+- **Slow on old hardware** lower `DETECTION_FPS` in the config.
 - **No detections** confirm the scene contains one of the tracked classes and that lighting is adequate.

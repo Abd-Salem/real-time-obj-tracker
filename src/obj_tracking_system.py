@@ -154,11 +154,6 @@ class ObjectTrackingSystem:
     # --------------------------------------------------------
  
     def _sync_tracks(self, tracked: sv.Detections):
-        """
-        FIX (#2): self.tracks was never written to before, so
-        is_already_tracked() always compared against an empty
-        dict. Now we rebuild it after every tracker update.
-        """
  
         self.tracks = {}
  
@@ -178,14 +173,6 @@ class ObjectTrackingSystem:
     # --------------------------------------------------------
  
     def process_roi(self, frame, roi):
-        """
-        FIX (#3): previously, detections judged "new" here were
-        never actually added to the tracker or stored anywhere -
-        the comment said they'd be picked up "on the next detection
-        cycle" but no code did that. Now this returns the *new*
-        (not-already-tracked) detections so process_frame can merge
-        them straight into the tracker update for this frame.
-        """
  
         print(
             f"[ROI] "
@@ -256,14 +243,6 @@ class ObjectTrackingSystem:
     # --------------------------------------------------------
  
     def process_frame(self, frame):
-        """
-        FIX (#1): the tracker used to only run inside the
-        DETECTION_FPS branch, so most camera frames produced
-        tracked = None and drew nothing. ByteTrack expects to be
-        called every frame to age/predict tracks correctly, so it
-        now runs unconditionally, fed with an empty Detections
-        object on frames with no fresh YOLO result.
-        """
  
         current_time = time.monotonic()
  
