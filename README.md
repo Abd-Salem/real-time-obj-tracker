@@ -109,7 +109,7 @@ This will:
 
 - download Python 3.14 if needed,
 - create the `.venv` virtual environment,
-- install all locked dependencies from `uv.lock` — including the CPU build of PyTorch from the PyTorch index.
+- install all locked dependencies from `uv.lock` including the CPU build of PyTorch from the PyTorch index.
 
 > Use `uv sync --locked` in CI to guarantee the exact locked versions are installed.
 
