@@ -27,6 +27,8 @@ class ObjectTrackingSystem:
  
         self.last_detection_time = 0.0
 
+        self.last_frame_detections = sv.Detections.empty()
+
 
 
     
@@ -290,7 +292,7 @@ class ObjectTrackingSystem:
  
         else:
  
-            frame_detections = sv.Detections.empty()
+            frame_detections = self.last_frame_detections
  
         # Merge any newly-found ROI objects into this frame's
         # detections so the tracker can pick them up immediately,
@@ -301,6 +303,11 @@ class ObjectTrackingSystem:
                 [frame_detections, new_roi_detections]
             )
  
+        # Remember this frame's detections so the next frame(s) can
+        # carry them forward if no fresh detection arrives before
+        # the next tick.
+        self.last_frame_detections = frame_detections
+
         # ====================================================
         # STATE 3:
         # Update tracker - now called every frame, not just on
